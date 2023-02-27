@@ -1,0 +1,29 @@
+.app {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    /* or inline-flex */
+}
+
+.results {
+    display: flex;
+    /* or inline-flex */
+    direction: column;
+}
+
+.graph {
+    margin-top: 10px
+}
+
+.playround {
+    margin-left: 50px
+}
+
+.playroundLabel {
+    margin-right: 50px;
+}

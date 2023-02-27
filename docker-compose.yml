@@ -1,0 +1,12 @@
+services:
+  mongo_db:
+    image: mongo:4.4.6
+    container_name: mongo_db
+    ports:
+      - 5992:27017
+    expose:
+      - 5992
+networks:
+  default:
+    external:
+      name: amplNetwork
