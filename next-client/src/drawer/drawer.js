@@ -1,6 +1,7 @@
 const colorBlack = '#000';
 const colorGrey = '#e9e9e9';
 
+// drows simple line
 const drawLine = (ctx, startX, startY, endX, endY, color) => {
     ctx.save();
     ctx.strokeStyle = color;
@@ -11,6 +12,7 @@ const drawLine = (ctx, startX, startY, endX, endY, color) => {
     ctx.restore();
 }
 
+// draws axises
 const drawAxises = (ctx, width, height, offset, color) => {
     const axisWidth = 6;
     const steps = 10;
@@ -22,6 +24,9 @@ const drawAxises = (ctx, width, height, offset, color) => {
 
     const textOffset = 12;
     const endX = offset + axisWidth / 2;
+
+    drawLine(ctx, offset, height, width + offset, height, colorBlack);
+    drawLine(ctx, offset, height, offset, 0, colorBlack);
 
     ctx.font = '9px Arial';
     ctx.textAlign = 'start';
@@ -37,6 +42,7 @@ const drawAxises = (ctx, width, height, offset, color) => {
     ctx.fill();
 }
 
+// draws grid
 const drawGrid = (ctx, width, height, offset, color) => {
 
     const stepX = width / 10;
@@ -52,6 +58,7 @@ const drawGrid = (ctx, width, height, offset, color) => {
     }
 }
 
+// evaluates graph dots
 const exp = (secretNumber) => {
     let x = 0;
     const dots = [];
@@ -70,6 +77,7 @@ function timeout(delay) {
     return new Promise(res => setTimeout(res, delay));
 }
 
+// draws whole grpah
 const drawGraph = (roundSecret, canvas, canvasWidth, canvasHeight) => {
     if (canvas && roundSecret) {
         var ctx = canvas.getContext("2d");
@@ -94,8 +102,6 @@ const drawGraph = (roundSecret, canvas, canvasWidth, canvasHeight) => {
             await timeout(0);
         }
 
-        drawLine(ctx, offset, graphHeight, graphWidth + offset, graphHeight, colorBlack);
-        drawLine(ctx, offset, graphHeight, offset, 0, colorBlack);
         drawAxises(ctx, graphWidth, graphHeight, offset, colorBlack);
         drawGrid(ctx, graphWidth, graphHeight, offset, colorGrey);
 
