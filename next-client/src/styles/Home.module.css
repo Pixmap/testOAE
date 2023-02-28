@@ -5,11 +5,6 @@
     min-height: 100vh;
 }
 
-.container {
-    display: flex;
-    /* or inline-flex */
-}
-
 .results {
     display: flex;
     /* or inline-flex */

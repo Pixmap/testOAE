@@ -3,10 +3,34 @@ services:
     image: mongo:4.4.6
     container_name: mongo_db
     ports:
-      - 5992:27017
+      - 27017:27017
     expose:
-      - 5992
-networks:
-  default:
-    external:
-      name: amplNetwork
+      - 27017
+  server:
+    image: node:18.14.0
+    container_name: server
+    command: npm run start
+    build: ./server
+    working_dir: /app/server
+    volumes:
+      - ./:/app
+    ports:
+      - '7071:7071'
+    expose:
+      - 7071
+    depends_on:
+      - mongo_db
+  client:
+    image: node:18.14.0
+    container_name: client
+    command: npm run dev
+    build: ./next-client
+    working_dir: /app/next-client
+    volumes:
+      - ./:/app
+    ports:
+      - '3000:3000'
+    expose:
+      - 3000
+    depends_on:
+      - server

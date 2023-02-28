@@ -10,8 +10,10 @@ class DBManager {
     init = async (dbName) => {
         try {
             // establish connection with databae
-            // all configs values are hardcoded just fir simplicity, ideally should be taken from config
-            await mongoose.connect(`mongodb://127.0.0.1:27017/${dbName}`);
+            // all configs values are hardcoded just fir simplicity, ideally should be taken from config\
+            // replace on `mongodb://127.0.0.1:27017/${dbName}` for starting without docker 
+            await mongoose.connect(`mongodb://mongo_db:27017/${dbName}`);
+            console.info('DB connected!');
         } catch (err) {
             console.error(`Filed to connect database: ${err.message}`);
             process.exit(1);

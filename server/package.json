@@ -5,14 +5,12 @@
     "main": "main.js",
     "type": "module",
     "scripts": {
-        "test": "npm run test"
+        "start": "node main"
     },
     "author": "Sergey Trushin",
     "license": "MIT",
     "dependencies": {
-        "express": "^4.18.2",
         "mongoose": "^6.9.2",
-        "uuidv4": "^6.2.13",
         "ws": "^8.12.1"
     }
 }

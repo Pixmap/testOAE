@@ -1,5 +1,3 @@
-"use strict"
-
 const colorBlack = '#000';
 const colorGrey = '#e9e9e9';
 

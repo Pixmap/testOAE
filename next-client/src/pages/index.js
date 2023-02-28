@@ -2,6 +2,7 @@
 import styles from '../styles/Home.module.css'
 import { useEffect, useRef, useState } from 'react';
 import drawGraph from '@/drawer/drawer';
+import sendToWebsocket from '@/services/websoket';
 
 export default function Home() {
     const canvasRef = useRef();
@@ -41,7 +42,6 @@ export default function Home() {
                 }
 
                 if (obj.cmd === 'roundresults' && obj.payload.roundResults) {
-                    console.log(JSON.stringify(obj.payload.roundResults));
                     setPlayers(obj.payload.roundResults);
                     setRoundSecret(obj.payload.secretNumber);
                     setRoundNumber(obj.payload.roundNumber);
@@ -76,7 +76,7 @@ export default function Home() {
     const handleSubmit = (event) => {
         event.preventDefault();
         setReadyToPlay(false);
-        wsConnection.send(JSON.stringify({ cmd: 'playround', payload: { guessedNumber } }));
+        sendToWebsocket(wsConnection, (JSON.stringify({ cmd: 'playround', payload: { guessedNumber } })));
     }
 
     return (
@@ -84,7 +84,9 @@ export default function Home() {
             {
                 gameIsOver ?
                     <>
-                        <button onClick={() => { wsConnection.send(JSON.stringify({ cmd: 'start' })) }}>Start game</button>
+                        <button onClick={() => {
+                            sendToWebsocket(wsConnection, JSON.stringify({ cmd: 'start' }));
+                        }}>Start game</button>
                     </> :
                     <>
                         <div className='results'>
@@ -96,7 +98,7 @@ export default function Home() {
                                             {index ? index : ''} Balance: {player.balance}
                                         </p> :
                                         <p style={{ color: player.win ? 'green' : 'red' }}
-                                            key={index}> {index === 0 ? 'Your' : 'Player'}  {index ? index : ''}
+                                            key={index}> {index === 0 ? 'You' : 'Player'}  {index ? index : ''}
                                             {player.win ? ' Won' : ' Lost'} Guessed number: {player.guessedNumber} Balance: {player.balance}
                                         </p>
                                 ))

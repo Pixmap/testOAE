@@ -3,7 +3,9 @@ import DBManager from "./db/db-manager.js";
 import { WebSocketServer } from "ws";
 import Game from "./services/game.js";
 
-// create DBManager instance
+console.info('NodeJS server has started!');
+
+// create DBManager instance()
 const dbManager = new DBManager();
 dbManager.init('test');
 
@@ -14,7 +16,7 @@ let theGame;
 // to handle websocket events
 wss.on('connection', (ws) => {
     ws.on('open', () => {
-        console.info('connection opened');
+        console.info('ws connection opened');
     });
 
     ws.on("close", () => {
@@ -33,7 +35,7 @@ wss.on('connection', (ws) => {
                 credit,
                 roundCost,
                 graphLifetime: 3000,
-                roundDelay: 1000,
+                roundDelay: 10000,
                 dbManager: dbManager
             });
             // notify client that game was started
