@@ -11,4 +11,9 @@
     'http://localhost:3000'
 
 
+next-clent listening port 3000
+server listening ws on port 7071
+mongo listening default port 27017
 
+Delay between rounds 10 seconds.
+Graph clear delay is 3 seconds.
